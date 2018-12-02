@@ -8,7 +8,7 @@ routes = require('./routes/routes');
 bodyParser = require('body-parser');
 
 
-const port = process.env.port || 3050
+const port = process.env.PORT || 3050
 
 mongoose.connect(config.database).then(
   () => {
