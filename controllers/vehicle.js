@@ -78,34 +78,40 @@ let functions = {
       q = {type: req.body.type, status: { $in: [2, 3] }};
     }
 
-    Vehicle.find(
-      q,
-      {
-        _id: true,
-        name: true,
-        make: true,
-        model: true,
-        image: true,
-        other_price: true,
-        city_price: true,
-        driver_price: true,
-        description: true,
+    Vehicle.find({} , (error , found)=>{
+
+      if(found){
+        res.json({success : true , result : found})
       }
-    ).populate({
-      path: 'by',
-      match: {$text: {$search: req.body.type}},
-      select: 'city company',
     })
-      .exec(function (error, docs) {
+    // Vehicle.find(
+    //   q,
+    //   {
+    //     _id: true,
+    //     name: true,
+    //     make: true,
+    //     model: true,
+    //     image: true,
+    //     other_price: true,
+    //     city_price: true,
+    //     driver_price: true,
+    //     description: true,
+    //   }
+    // ).populate({
+    //   path: 'by',
+    //   match: {$text: {$search: req.body.type}},
+    //   select: 'city company',
+    // })
+    //   .exec(function (error, docs) {
 
-        if (error) return res.status(500).send({success: false, msg: error});
+    //     if (error) return res.status(500).send({success: false, msg: error});
 
-        docs = docs.filter(function (doc) {
-          return !!doc.by;
-        });
+    //     docs = docs.filter(function (doc) {
+    //       return !!doc.by;
+    //     });
 
-        res.json({success: true, msg: docs});
-      })
+    //     res.json({success: true, msg: docs});
+    //   })
   },
 };
 
