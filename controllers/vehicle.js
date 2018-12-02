@@ -81,7 +81,7 @@ let functions = {
     Vehicle.find({} , (error , found)=>{
 
       if(found){
-        res.json({success : true , result : found})
+        res.json({success : true , msg : found})
       }
     })
     // Vehicle.find(
