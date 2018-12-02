@@ -93,7 +93,7 @@ let functions = {
       }
     ).populate({
       path: 'by',
-      match: {$text: {$search: req.body.from}},
+      match: {$text: {$search: req.body.type}},
       select: 'city company',
     })
       .exec(function (error, docs) {
